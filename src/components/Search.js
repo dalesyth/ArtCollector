@@ -9,7 +9,13 @@ import {
   fetchQueryResults
 } from '../api';
 
-const Search = (props) => {
+const Search = ({setIsLoading, setSearchResults}) => {
+
+  const [centuryList, setCenturyList] = useState([]);
+  const [classificationList, setClassificationList] = useState([]);
+  const [queryString, setQueryString] = useState("");
+  const [century, setCentury] = useState("any");
+  const [classification, setClassification] = useState("any");
   // Make sure to destructure setIsLoading and setSearchResults from the props
 
 
