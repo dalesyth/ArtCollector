@@ -13,7 +13,7 @@ import React from "react";
  * </div>
  */
 
-export const Title = () => {
+const Title = () => {
   return (
     <div id="title">
       <h1>The Art Collector</h1>
@@ -21,3 +21,5 @@ export const Title = () => {
     </div>
   );
 };
+
+export default Title;

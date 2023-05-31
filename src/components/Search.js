@@ -39,6 +39,13 @@ const Search = ({setIsLoading, setSearchResults}) => {
    * Make sure to console.error on caught errors from the API methods.
    */
   useEffect(() => {
+    Promise.all([fetchAllCenturies, fetchAllClassifications])
+      .then(function (response) {
+        return response.json()
+      })
+      .catch(function (error) {
+        console.error(error);
+      })
 
   }, []);
 
@@ -60,6 +67,23 @@ const Search = ({setIsLoading, setSearchResults}) => {
    */
   return <form id="search" onSubmit={async (event) => {
     // write code here
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetchQueryResults({century, classification, queryString});
+      const data = await response.json();
+
+      setSearchResults(data);
+      
+    } catch (error) {
+      console.error(error);
+    }
+
+    setIsLoading(false)
+
+
+
   }}>
     <fieldset>
       <label htmlFor="keywords">Query</label>
@@ -67,7 +91,7 @@ const Search = ({setIsLoading, setSearchResults}) => {
         id="keywords" 
         type="text" 
         placeholder="enter keywords..." 
-        value={/* this should be the query string */} 
+        value={`${queryString}`} 
         onChange={/* this should update the value of the query string */}/>
     </fieldset>
     <fieldset>

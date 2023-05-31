@@ -14,7 +14,7 @@ const App = () => {
    * isLoading, setIsLoading (default should be false)
    */
 
-  const [searchResults, setSearchResults] = useState({info: {}, records: []});
+  const [searchResults, setSearchResults] = useState({ info: {}, records: [] });
   const [featuredResult, setFeaturedResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +23,7 @@ const App = () => {
       {/* <Title /> is static, doesn't need any props */}
       <Title />
       {/* <Search /> needs props for setIsLoading and setSearchResults (trigger <Loading /> on search start/end, and transfer results to preview) */}
-      <Search setIsLoading={setIsLoading} setSearchResults={setSearchResults}/>
+      <Search setIsLoading={setIsLoading} setSearchResults={setSearchResults} />
       {/* <Preview /> needs props for searchResults, setIsLoading and setSearchResults (clicking prev/next buttons), and setFeaturedResult (clicking a preview) */}
       {/* <Preview /> */}
       {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}

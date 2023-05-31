@@ -8,10 +8,12 @@ import React from "react";
  * </div>
  */
 
-export const Loading = () => {
+const Loading = () => {
   return (
     <div id="loading">
       <h2 className="message">Searching...</h2>
     </div>
   );
 };
+
+export default Loading;
