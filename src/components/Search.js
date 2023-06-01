@@ -9,13 +9,10 @@ import {
   fetchQueryResults,
 } from "../api";
 
-const Search = ({ setIsLoading, setSearchResults }) => {
-  const [centuryList, setCenturyList] = useState([]);
-  const [classificationList, setClassificationList] = useState([]);
-  const [queryString, setQueryString] = useState("");
-  const [century, setCentury] = useState("any");
-  const [classification, setClassification] = useState("any");
+const Search = (props) => {
   // Make sure to destructure setIsLoading and setSearchResults from the props
+
+  const {setIsLoading, setSearchResults} = props
 
   /**
    * We are at the Search component, a child of app. This has a form, so we need to use useState for
@@ -28,6 +25,12 @@ const Search = ({ setIsLoading, setSearchResults }) => {
    * classification, setClassification (default should be the string 'any')
    */
 
+  const [centuryList, setCenturyList] = useState([]);
+  const [classificationList, setClassificationList] = useState([]);
+  const [queryString, setQueryString] = useState("");
+  const [century, setCentury] = useState("any");
+  const [classification, setClassification] = useState("any");
+
   /**
    * Inside of useEffect, use Promise.all([]) with fetchAllCenturies and fetchAllClassifications
    *
@@ -37,13 +40,40 @@ const Search = ({ setIsLoading, setSearchResults }) => {
    */
   useEffect(() => {
     Promise.all([fetchAllCenturies, fetchAllClassifications])
-      .then(function (response) {
-        return response.json();
+      .then((response) => {
+        // console.log(response)
+        setCenturyList(response);
+        setClassificationList(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   }, []);
+
+  // Johns useEffect example
+
+  // const Harvard = () => {
+  //   const [ artist, setArtist ] = useState({})
+
+  //   useEffect(() => {
+  //     const getArtist = async () => {
+  //       try {
+  //         const request = await fetch(`https://api.harvardartmuseums.org/person?apikey=${APIKEY}`)
+  //         const person = await request.json()
+  //         setArtist(person)
+  //       } catch (error) {
+  //         console.log(error)
+  //       }
+  //     }
+  //     getArtist()
+  //   }, [])
+
+  //   return (
+  //     <>
+  //     {artist && <p>{artist.info.next}</p>}
+  //     </>
+  //   )
+  // }
 
   /**
    * This is a form element, so we need to bind an onSubmit handler to it which:
@@ -75,14 +105,17 @@ const Search = ({ setIsLoading, setSearchResults }) => {
             classification,
             queryString,
           });
-          const data = await response.json();
+          // const data = await response.json();
+          // console.log(data)
 
-          setSearchResults(data);
+          // console.log(response)
+
+          setSearchResults(response);
         } catch (error) {
           console.error(error);
+        } finally {
+          setIsLoading(false);
         }
-
-        setIsLoading(false);
       }}
     >
       <fieldset>
@@ -110,11 +143,8 @@ const Search = ({ setIsLoading, setSearchResults }) => {
         >
           <option value="any">Any</option>
           {/* map over the classificationList, return an <option /> */
-            classificationList.map((item) => {
-              return (
-
-              )
-            })
+          
+         
           
           }
         </select>
@@ -130,14 +160,7 @@ const Search = ({ setIsLoading, setSearchResults }) => {
           onChange={(event) => setCentury(event.target.value)}
         >
           <option value="any">Any</option>
-          {/* map over the centuryList, return an <option /> */
-            centuryList.map((item) => {
-              return(
-                
-              )
-            })
-          
-          }
+          {/* map over the centuryList, return an <option /> */}
         </select>
       </fieldset>
       <button>SEARCH</button>
