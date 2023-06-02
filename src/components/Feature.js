@@ -92,6 +92,59 @@ const Searchable = (props) => {
  *
  * This component should be exported as default.
  */
-const Feature = (props) => {};
+const Feature = (props) => {
+  const { featuredResult, setIsLoading, setSearchResults } = props;
+
+  console.log(featuredResult);
+
+  return (
+    <>
+      {!featuredResult ? (
+        <main id="feature"></main>
+      ) : (
+        <main id="feature">
+          <div className="object-feature">
+            <header>
+              <h3>{featuredResult.title}</h3>
+              <h4>{featuredResult.dated}</h4>
+            </header>
+
+            <section className="facts">
+              <span className="title">DESCRIPTION</span>
+              <span className="content">{featuredResult.description}</span>
+              <span className="title">CULTURE</span>
+              <span className="content">{featuredResult.culture}</span>
+              <span className="title">STYLE</span>
+              <span className="content">{featuredResult.style}</span>
+              <span className="title">TECHNIQUE</span>
+              <span className="content">{featuredResult.technique}</span>
+              <span className="title">MEDIUM</span>
+              <span className="content">{featuredResult.medium}</span>
+              <span className="title">DIMENSIONS</span>
+              <span className="content">{featuredResult.dimensions}</span>
+              {/* <span className="title">PEOPLE</span>
+              <span className="content">{featuredResult.people}</span> */}
+              <span className="title">DEPARTMENT</span>
+              <span className="content">{featuredResult.department}</span>
+              <span className="title">DIVISION</span>
+              <span className="content">{featuredResult.division}</span>
+              <span className="title">CONTACT</span>
+              <span className="content">{featuredResult.contact}</span>
+              <span className="title">CREDIT</span>
+              <span className="content">{featuredResult.creditline}</span>
+            </section>
+
+            <section className="photos">
+              <img
+                src={featuredResult.primaryimageurl}
+                alt={featuredResult.description}
+              />
+            </section>
+          </div>
+        </main>
+      )}
+    </>
+  );
+};
 
 export default Feature;

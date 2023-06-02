@@ -108,7 +108,7 @@ const Search = (props) => {
           // const data = await response.json();
           // console.log(data)
 
-          // console.log(response)
+          console.log(response)
 
           setSearchResults(response);
         } catch (error) {
