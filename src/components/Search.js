@@ -143,6 +143,11 @@ const Search = (props) => {
         >
           <option value="any">Any</option>
           {/* map over the classificationList, return an <option /> */
+            classificationList.map((classification) => {
+              return (
+                <option></option>
+              )
+            })
           
          
           
@@ -160,7 +165,13 @@ const Search = (props) => {
           onChange={(event) => setCentury(event.target.value)}
         >
           <option value="any">Any</option>
-          {/* map over the centuryList, return an <option /> */}
+          {/* map over the centuryList, return an <option /> */
+            centuryList.map((century) => {
+              return (
+                <option></option>
+              )
+            })
+          }
         </select>
       </fieldset>
       <button>SEARCH</button>

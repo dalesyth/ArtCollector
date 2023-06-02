@@ -14,12 +14,16 @@ const Preview = (props) => {
    * You need info, records, setSearchResults, setFeaturedResult, and setIsLoading as available constants
    */
 
+ 
+
   const {
-    searchresults: { info, records },
-    setIsLoading,
     setSearchResults,
     setFeaturedResult,
-  } = props;
+    setIsLoading,
+   
+  } = props
+
+  const { info, records } = props.searchResults
 
   /**
    * Don't touch this function, it's good to go.
@@ -60,7 +64,8 @@ const Preview = (props) => {
         </button>
       </header>
       <section className="results">
-        {/* Here we should map over the records, and render something like this for each one:
+        {
+          /* Here we should map over the records, and render something like this for each one:
           <div  
             key={ index }
             className="object-preview"
@@ -75,7 +80,27 @@ const Preview = (props) => {
               // if the record.title exists, add this: <h3>{ record.title }</h3>, otherwise show this: <h3>MISSING INFO</h3>
             }
           </div>
-        */}
+        */
+
+          records.map((record, index) => {
+            return (
+              <div
+                key={index}
+                className="object-preview"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setFeaturedResult(record);
+                }}
+              >
+                {record.primaryimageurl ? (
+                  <img src={record.primaryimageurl} alt={record.description} />
+                ) : null}
+
+                {record.title ? <h3>{record.title}</h3> : <h3>MISSING INFO</h3>}
+              </div>
+            );
+          })
+        }
       </section>
     </aside>
   );
