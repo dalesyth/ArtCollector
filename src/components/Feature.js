@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 // Don't touch this import
 import { fetchQueryResultsFromTermAndValue } from "../api";
@@ -31,7 +31,7 @@ import { fetchQueryResultsFromTermAndValue } from "../api";
  */
 const Searchable = (props) => {
   const { searchTerm, searchValue, setIsLoading, setSearchResults } = props;
-
+  console.log(props);
   return (
     <span className="content">
       <a
@@ -52,7 +52,7 @@ const Searchable = (props) => {
           }
         }}
       >
-        SOME SEARCH TERM
+        {searchTerm}
       </a>
     </span>
   );
@@ -95,9 +95,7 @@ const Searchable = (props) => {
 const Feature = (props) => {
   const { featuredResult, setIsLoading, setSearchResults } = props;
 
-  const people = featuredResult.people[0].name;
-
-  console.log(people);
+  console.log(featuredResult.culture);
 
   return (
     <>
@@ -112,28 +110,96 @@ const Feature = (props) => {
             </header>
 
             <section className="facts">
-              <span className="title">DESCRIPTION</span>
-              <span className="content">{featuredResult.description}</span>
-              <span className="title">CULTURE</span>
-              <span className="content">{featuredResult.culture}</span>
-              <span className="title">STYLE</span>
-              <span className="content">{featuredResult.style}</span>
-              <span className="title">TECHNIQUE</span>
-              <span className="content">{featuredResult.technique}</span>
-              <span className="title">MEDIUM</span>
-              <span className="content">{featuredResult.medium}</span>
-              <span className="title">DIMENSIONS</span>
-              <span className="content">{featuredResult.dimensions}</span>
-              <span className="title">PEOPLE</span>
-              <span className="content">{people}</span>
-              <span className="title">DEPARTMENT</span>
-              <span className="content">{featuredResult.department}</span>
-              <span className="title">DIVISION</span>
-              <span className="content">{featuredResult.division}</span>
-              <span className="title">CONTACT</span>
-              <span className="content">{featuredResult.contact}</span>
-              <span className="title">CREDIT</span>
-              <span className="content">{featuredResult.creditline}</span>
+              {featuredResult.description ? (
+                <>
+                  <span className="title">DESCRIPTION</span>
+                  <span className="content">{featuredResult.description}</span>
+                </>
+              ) : null}
+
+              {featuredResult.culture ? (
+                <>
+                  <span className="title">CULTURE</span>
+                  {/* <span className="content">{featuredResult.culture}</span> */}
+                  <span className="content">
+                    <Searchable
+                      searchTerm={featuredResult.culture}
+                      setIsLoading={setIsLoading}
+                      searchValue={featuredResult.culture}
+                      setSearchResults={setSearchResults}
+                    />
+                  </span>
+                </>
+              ) : null}
+
+              {featuredResult.style ? (
+                <>
+                  <span className="title">STYLE</span>
+                  <span className="content">{featuredResult.style}</span>
+                </>
+              ) : null}
+
+              {featuredResult.technique ? (
+                <>
+                  <span className="title">TECHNIQUE</span>
+                  <span className="content">{featuredResult.technique}</span>
+                </>
+              ) : null}
+
+              {featuredResult.medium ? (
+                <>
+                  <span className="title">MEDIUM</span>
+                  <span className="content">{featuredResult.medium}</span>
+                </>
+              ) : null}
+
+              {featuredResult.dimensions ? (
+                <>
+                  <span className="title">DIMENSIONS</span>
+                  <span className="content">{featuredResult.dimensions}</span>
+                </>
+              ) : null}
+
+              {featuredResult.people ? (
+                <>
+                  <span className="title">PERSON</span>
+                  {featuredResult?.people.map(({ displayname, personid }) => {
+                    return (
+                      <span key={personid} className="content">
+                        {displayname}
+                      </span>
+                    );
+                  })}
+                </>
+              ) : null}
+
+              {featuredResult.department ? (
+                <>
+                  <span className="title">DEPARTMENT</span>
+                  <span className="content">{featuredResult.department}</span>
+                </>
+              ) : null}
+
+              {featuredResult.division ? (
+                <>
+                  <span className="title">DIVISION</span>
+                  <span className="content">{featuredResult.division}</span>
+                </>
+              ) : null}
+
+              {featuredResult.contact ? (
+                <>
+                  <span className="title">CONTACT</span>
+                  <span className="content">{featuredResult.contact}</span>
+                </>
+              ) : null}
+
+              {featuredResult.creditline ? (
+                <>
+                  <span className="title">CREDIT</span>
+                  <span className="content">{featuredResult.creditline}</span>
+                </>
+              ) : null}
             </section>
 
             <section className="photos">
