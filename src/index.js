@@ -30,7 +30,7 @@ const App = () => {
       <Feature featuredResult={featuredResult} setIsLoading={setIsLoading} setSearchResults={setSearchResults} />
       {/* <Loading /> is static, but should only render when isLoading is true */}
       {/* <Loading /> use a ternary and render null if isLoading is false */}
-      {/* (isLoading) ? <Loading /> : null */}
+      {(isLoading) ? <Loading /> : null}
     </div>
   );
 };

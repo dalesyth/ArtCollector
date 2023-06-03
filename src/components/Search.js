@@ -39,11 +39,12 @@ const Search = (props) => {
    * Make sure to console.error on caught errors from the API methods.
    */
   useEffect(() => {
-    Promise.all([fetchAllCenturies, fetchAllClassifications])
-      .then((response) => {
+    Promise.all([fetchAllCenturies(), fetchAllClassifications()])
+      .then(([century, classification]) => {
         // console.log(response)
-        setCenturyList(response);
-        setClassificationList(response);
+        setCenturyList(century);
+        setClassificationList(classification);
+        
       })
       .catch((error) => {
         console.error(error);
@@ -108,7 +109,7 @@ const Search = (props) => {
           // const data = await response.json();
           // console.log(data)
 
-          console.log(response)
+          // console.log(response)
 
           setSearchResults(response);
         } catch (error) {
@@ -142,15 +143,14 @@ const Search = (props) => {
           onChange={(event) => setClassification(event.target.value)}
         >
           <option value="any">Any</option>
-          {/* map over the classificationList, return an <option /> */
+          {
+            /* map over the classificationList, return an <option /> */
             classificationList.map((classification) => {
+              // console.log(classification.name)
               return (
-                <option></option>
+                <option>{classification.name}</option>
               )
             })
-          
-         
-          
           }
         </select>
       </fieldset>
@@ -167,10 +167,12 @@ const Search = (props) => {
           <option value="any">Any</option>
           {/* map over the centuryList, return an <option /> */
             centuryList.map((century) => {
+              // console.log(century.name)
               return (
-                <option></option>
+                <option>{century.name}</option>
               )
             })
+            
           }
         </select>
       </fieldset>

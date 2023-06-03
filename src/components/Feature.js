@@ -95,7 +95,9 @@ const Searchable = (props) => {
 const Feature = (props) => {
   const { featuredResult, setIsLoading, setSearchResults } = props;
 
-  console.log(featuredResult);
+  const people = featuredResult.people[0].name;
+
+  console.log(people);
 
   return (
     <>
@@ -122,8 +124,8 @@ const Feature = (props) => {
               <span className="content">{featuredResult.medium}</span>
               <span className="title">DIMENSIONS</span>
               <span className="content">{featuredResult.dimensions}</span>
-              {/* <span className="title">PEOPLE</span>
-              <span className="content">{featuredResult.people}</span> */}
+              <span className="title">PEOPLE</span>
+              <span className="content">{people}</span>
               <span className="title">DEPARTMENT</span>
               <span className="content">{featuredResult.department}</span>
               <span className="title">DIVISION</span>
