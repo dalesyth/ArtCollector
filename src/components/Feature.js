@@ -31,7 +31,10 @@ import { fetchQueryResultsFromTermAndValue } from "../api";
  */
 const Searchable = (props) => {
   const { searchTerm, searchValue, setIsLoading, setSearchResults } = props;
-  console.log(props);
+  // console.log(props);
+  // console.log(searchTerm);
+  // console.log(searchValue);
+
   return (
     <span className="content">
       <a
@@ -40,10 +43,10 @@ const Searchable = (props) => {
           event.preventDefault();
           setIsLoading(true);
           try {
-            const response = await fetchQueryResultsFromTermAndValue({
+            const response = await fetchQueryResultsFromTermAndValue(
               searchTerm,
-              searchValue,
-            });
+              searchValue
+            );
             setSearchResults(response);
           } catch (error) {
             console.error(error);
@@ -52,7 +55,7 @@ const Searchable = (props) => {
           }
         }}
       >
-        {searchTerm}
+        {searchValue}
       </a>
     </span>
   );
@@ -95,7 +98,7 @@ const Searchable = (props) => {
 const Feature = (props) => {
   const { featuredResult, setIsLoading, setSearchResults } = props;
 
-  console.log(featuredResult.culture);
+  // console.log(featuredResult);
 
   return (
     <>
@@ -120,10 +123,10 @@ const Feature = (props) => {
               {featuredResult.culture ? (
                 <>
                   <span className="title">CULTURE</span>
-                  {/* <span className="content">{featuredResult.culture}</span> */}
+
                   <span className="content">
                     <Searchable
-                      searchTerm={featuredResult.culture}
+                      searchTerm="culture"
                       setIsLoading={setIsLoading}
                       searchValue={featuredResult.culture}
                       setSearchResults={setSearchResults}
@@ -142,14 +145,30 @@ const Feature = (props) => {
               {featuredResult.technique ? (
                 <>
                   <span className="title">TECHNIQUE</span>
-                  <span className="content">{featuredResult.technique}</span>
+
+                  <span className="content">
+                    <Searchable
+                      searchTerm="technique"
+                      setIsLoading={setIsLoading}
+                      searchValue={featuredResult.technique}
+                      setSearchResults={setSearchResults}
+                    />
+                  </span>
                 </>
               ) : null}
 
               {featuredResult.medium ? (
                 <>
                   <span className="title">MEDIUM</span>
-                  <span className="content">{featuredResult.medium}</span>
+
+                  <span className="content">
+                    <Searchable
+                      searchTerm="medium"
+                      setIsLoading={setIsLoading}
+                      searchValue={featuredResult.medium}
+                      setSearchResults={setSearchResults}
+                    />
+                  </span>
                 </>
               ) : null}
 
@@ -166,7 +185,12 @@ const Feature = (props) => {
                   {featuredResult?.people.map(({ displayname, personid }) => {
                     return (
                       <span key={personid} className="content">
-                        {displayname}
+                        <Searchable
+                          searchTerm="person"
+                          setIsLoading={setIsLoading}
+                          searchValue={featuredResult.people[0].displayname}
+                          setSearchResults={setSearchResults}
+                        />
                       </span>
                     );
                   })}

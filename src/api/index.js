@@ -10,13 +10,17 @@ export const KEY = "apikey=2cba254a-72c4-479f-aa87-83cc4b5a3eef";
  * This will make a call to the API for a single term and value (e.g. "person", and "unknown"), and return the result
  */
 export async function fetchQueryResultsFromTermAndValue(term, value) {
+  console.log(term)
+  console.log(value)
   try {
     const response = await fetch(`${ BASE_URL }/object?${ KEY }&${ term }=${ encodeURI(value.split('-').join('|')) }`);
     const data = await response.json();
 
     return data;
+    // console.log(data)
   } catch (error) {
     throw error;
+    
   }
 }
 
