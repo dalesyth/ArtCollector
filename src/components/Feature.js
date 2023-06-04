@@ -98,7 +98,7 @@ const Searchable = (props) => {
 const Feature = (props) => {
   const { featuredResult, setIsLoading, setSearchResults } = props;
 
-  // console.log(featuredResult);
+  console.log(featuredResult);
 
   return (
     <>

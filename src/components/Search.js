@@ -12,7 +12,7 @@ import {
 const Search = (props) => {
   // Make sure to destructure setIsLoading and setSearchResults from the props
 
-  const {setIsLoading, setSearchResults} = props
+  const { setIsLoading, setSearchResults } = props;
 
   /**
    * We are at the Search component, a child of app. This has a form, so we need to use useState for
@@ -44,37 +44,11 @@ const Search = (props) => {
         // console.log(response)
         setCenturyList(century);
         setClassificationList(classification);
-        
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-
-  // Johns useEffect example
-
-  // const Harvard = () => {
-  //   const [ artist, setArtist ] = useState({})
-
-  //   useEffect(() => {
-  //     const getArtist = async () => {
-  //       try {
-  //         const request = await fetch(`https://api.harvardartmuseums.org/person?apikey=${APIKEY}`)
-  //         const person = await request.json()
-  //         setArtist(person)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-  //     getArtist()
-  //   }, [])
-
-  //   return (
-  //     <>
-  //     {artist && <p>{artist.info.next}</p>}
-  //     </>
-  //   )
-  // }
 
   /**
    * This is a form element, so we need to bind an onSubmit handler to it which:
@@ -145,11 +119,9 @@ const Search = (props) => {
           <option value="any">Any</option>
           {
             /* map over the classificationList, return an <option /> */
-            classificationList.map((classification) => {
+            classificationList.map((classification, index) => {
               // console.log(classification.name)
-              return (
-                <option>{classification.name}</option>
-              )
+              return <option key={index}>{classification.name}</option>;
             })
           }
         </select>
@@ -165,14 +137,12 @@ const Search = (props) => {
           onChange={(event) => setCentury(event.target.value)}
         >
           <option value="any">Any</option>
-          {/* map over the centuryList, return an <option /> */
-            centuryList.map((century) => {
+          {
+            /* map over the centuryList, return an <option /> */
+            centuryList.map((century, index) => {
               // console.log(century.name)
-              return (
-                <option>{century.name}</option>
-              )
+              return <option key={index}>{century.name}</option>;
             })
-            
           }
         </select>
       </fieldset>
